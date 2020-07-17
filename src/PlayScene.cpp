@@ -14,8 +14,10 @@ PlayScene::~PlayScene()
 void PlayScene::draw()
 {
 	drawDisplayList();
-
-	Util::DrawLine(m_pPlayer->getTransform()->position, m_pPlaneSprite->getTransform()->position);
+	if (m_bDebugmode)
+	{
+		Util::DrawLine(m_pPlayer->getTransform()->position, m_pPlaneSprite->getTransform()->position);
+	}
 }
 
 void PlayScene::update()
@@ -111,6 +113,25 @@ void PlayScene::handleEvents()
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_ESCAPE))
 	{
 		TheGame::Instance()->quit();
+	}
+	if (!m_bHpressed)
+	{
+
+
+		if (EventManager::Instance().isKeyDown(SDL_SCANCODE_H))
+		{
+			m_bDebugmode = !m_bDebugmode;
+			m_bHpressed = true;
+			if (m_bDebugmode)
+				std::cout << "Debugmode" << std::endl;
+			else if (!m_bDebugmode)
+				std::cout << "Debubug mod off" << std::endl;
+		}
+
+	}
+	if (EventManager::Instance().isKeyUp(SDL_SCANCODE_H))
+	{
+		m_bHpressed = false;
 	}
 
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_1))
