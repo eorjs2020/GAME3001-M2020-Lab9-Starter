@@ -71,8 +71,13 @@ bool CollisionManager::AABBCheck(GameObject* object1, GameObject* object2)
 			object2->getRigidBody()->isColliding = true;
 
 			switch (object2->getType()) {
-			case TARGET:
-				std::cout << "Collision with Target!" << std::endl;
+			case OBSTACLE:
+				std::cout << "Collision with OBSTACLE!" << std::endl;
+				SoundManager::Instance().playSound("yay", 0);
+				break;
+			
+			case PLANE:
+				std::cout << "Collision with OBSTACLE!" << std::endl;
 				SoundManager::Instance().playSound("yay", 0);
 				break;
 			default:
